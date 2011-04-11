@@ -14,6 +14,12 @@
         <!-- absolute path to the Android SDK 2.0 install as defined in the ANDROID_HOME environment variable -->
         <android.sdk.path>${env.ANDROID_HOME}/</android.sdk.path>
 
+        <!-- The repository server for your android artifacts (e.g. Nexus instance in this example)-->
+        <repo.id>android.repo</repo.id>
+        <repo.url>svn:https://androidannotations.googlecode.com/svn/repository/releases</repo.url>
+        <!-- you need to provide username and password for the server in your settings.xml, see documentation
+            for the maven-deploy-plugin -->
+
         <!-- Following properties don't need to be changed   by user -->
         <sdk.platforms.path>${android.sdk.path}/platforms</sdk.platforms.path>
         <sdk.addons.path>${android.sdk.path}/add-ons</sdk.addons.path>
@@ -36,17 +42,13 @@
             <subscribe>http://groups.google.com/group/maven-android-developers</subscribe>
         </mailingList>
     </mailingLists>
-
-	<distributionManagement>
-		<repository>
-			<id>release-repo</id>
-			<url>svn:https://androidannotations.googlecode.com/svn/repository/releases</url>
-		</repository>
-		<snapshotRepository>
-			<id>snapshot-repo</id>
-			<url>svn:https://androidannotations.googlecode.com/svn/repository/snapshots</url>
-		</snapshotRepository>
-	</distributionManagement>
+    <distributionManagement>
+        <repository>
+            <id>${repo.id}</id>
+            <name>Android Repository</name>
+            <url>${repo.url}</url>
+        </repository>
+    </distributionManagement>
 
     <build>
         <pluginManagement>
